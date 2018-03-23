@@ -1,6 +1,6 @@
 package pkg;
 
-public class Client3 {
+public class Client3 implements Client {
 	public void walk() {
 		System.out.println("-->Client3.walk()");
 		ProviderManager pMan1 = ProviderManager.getManager();
@@ -8,8 +8,7 @@ public class Client3 {
 		Provider p1 = pMan1.getProvider(this);
 		System.out.println("Num providers available: " + pMan1.numProvidersAvailable());
 		Foo f1 = new Foo();
-		p1.service(this,f1);
+		p1.service(this, f1);
 		System.out.println("f1: " + f1);
 	}
 }
-
