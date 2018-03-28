@@ -1,12 +1,15 @@
 package pkg;
 
+import java.util.HashMap;
+
 public class ProviderManager {
 
 	private static ProviderManager uniqueInstance;
 
-	Provider[] providers = new Provider[3];
+	public static HashMap<Object, Provider> map = new HashMap<>();
 
-	private ProviderManager() { }
+	private ProviderManager() {
+	}
 
 	public static ProviderManager getManager() {
 		if (uniqueInstance == null) {
@@ -15,16 +18,18 @@ public class ProviderManager {
 		return uniqueInstance;
 	}
 
-	//don't forget to edit this
 	public Provider getProvider(Client c) {
-		
-	}
-	
-	public int numProvidersAvailable() {
-		int count = 0;
-		for(Provider p : providers) {
-			count++;
+		int numProviders = numProvidersAvailable();
+		if (numProviders > 0 && numProviders < 4) {
+			Provider p = new Provider();
+			map.put(c, p);
+			return p;
+		} else {
+			return null;
 		}
-		return count;
+	}
+
+	public int numProvidersAvailable() {
+		return 3 - map.size();
 	}
 }
